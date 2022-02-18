@@ -26,7 +26,7 @@
 {{#and price.price_range.min.with_tax price.price_range.max.with_tax}}
     {{!-- Never display the "non-sales price" if there is a price range to be shown, but we do want the element on the page --}}
     <div class="price-section price-section--withTax non-sale-price--withTax" style="display: none;">
-        <span>
+        <!--<span>
             {{> components/products/price-label
                 label_value=theme_settings.pdp-non-sale-price-label
                 fallback=(lang "page_builder.pdp-non-sale-price-label")
@@ -34,7 +34,11 @@
         </span>
         <span data-product-non-sale-price-with-tax class="price price--non-sale">
             {{price.non_sale_price_with_tax.formatted}}
-        </span>
+        </span>-->
+		
+		 {{#isnt cgroup_abbr_val ""}}
+            <span class="price-now-label" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{else}}style="padding-left: 5px"{{/unless}}>{{cgroup_abbr_val}}:</span>
+         {{/isnt}}
     </div>
     <div class="price-section price-section--withTax">
         <span class="price-label">{{theme_settings.pdp-price-label}}</span>
@@ -89,13 +93,19 @@
         </span>
     </div>
     <div class="price-section price-section--withoutTax{{#and price_range.min.with_tax price_range.max.with_tax}} price-section--minor{{/and}}">
-        <span class="price-label">{{theme_settings.pdp-price-label}}</span>
+        <!--<span class="price-label">{{theme_settings.pdp-price-label}}</span>
         <span class="price-now-label" style="display: none;">
             {{> components/products/price-label
                 label_value=theme_settings.pdp-sale-price-label
                 fallback=(lang "page_builder.pdp-sale-price-label")
             }}
-        </span>
+        </span>-->
+		<!-- <span class="price-label">{{theme_settings.pdp-price-label}}</span>
+        <span class="price-now-label" style="display: none;">{{theme_settings.pdp-sale-price-label}}</span>-->
+         {{#isnt cgroup_abbr_val ""}}
+            <span class="price-now-label" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{else}}style="padding-left: 5px"{{/unless}}>{{cgroup_abbr_val}}:</span>
+            {{/isnt}}
+		
         <span data-product-price-without-tax class="price price--withoutTax">{{price.price_range.min.without_tax.formatted}} - {{price.price_range.max.without_tax.formatted}}</span>
         {{#and price.price_range.min.with_tax price.price_range.max.with_tax}}
             <abbr title="{{lang 'products.excluding_tax'}}">{{lang 'products.price_without_tax' tax_label=price.price_range.min.tax_label}}</abbr>

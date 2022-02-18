@@ -58,6 +58,33 @@
         {{~inject 'carouselArrowAndDotAriaLabel' (lang 'carousel.arrow_and_dot_aria_label')}}
         {{~inject 'carouselActiveDotAriaLabel' (lang 'carousel.active_dot_aria_label')}}
         {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
+		
+		<!--
+            {{assignVar "cgroup_names" "Pro Member 30/00,Wholesale 60/40,Distributor 70/50,Wholesale 50/30,Retail"}}
+            {{assignVar "cgroup_abbr" "Pro,Whls+,Dist,Whls,Retail"}}
+            {{assignVar "cgroup_index" -1}}
+            {{assignVar "cgroup_name" "-none-"}} 
+            {{#if customer.customer_group_name}}{{assignVar "cgroup_name" customer.customer_group_name}}{{/if}}
+            
+             {{#eachIndex (split (getVar "cgroup_names") ",")}}
+                cgroup_names loop item [{{item}}] index {{index}} isstring {{isString item}}
+                {{assignVar "names_item" item}} // need to turn to assigned var  in order to compare to customer group name
+                {{#eq (getVar "cgroup_name") (getVar "names_item")}}
+                    match! 
+                    {{assignVar "cgroup_index" index}}
+                {{/eq}}
+            {{/eachIndex}}
+            
+             {{#eachIndex (split (getVar "cgroup_abbr") ",")}}
+                {{#eq (getVar "cgroup_index") index}}
+                    {{assignVar "cgroup_abbr_val" item}}
+                {{/eq}}
+            {{/eachIndex}}
+            
+            customer.customer_group_name [{{customer.customer_group_name}}] isstring {{isString customer.customer_group_name}}
+            cgroup_index {{getVar "cgroup_index"}}
+            cgroup_abbr_val {{getVar "cgroup_abbr_val"}} 
+		--> 
     </head>
     <body>
         <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>

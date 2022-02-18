@@ -4,8 +4,12 @@ paths generate the same HTML structure with some differences in whether that ele
 
 If you are making a change here or in price-range.html, you probably want to make that change in both files. --}}
 
+<!-- muse+ custom price treatment -->
+<!-- [[[{{MSRP}} {{cgroup_abbr_val}}]]] -->           
+<!-- {{{JSONstringify price}}} -->
+
 {{#and price.price_range (if theme_settings.price_ranges '==' true)}}
-    {{> components/products/price-range price=price}}
+    {{> components/products/price-range price=price cgroup_abbr_val=cgroup_abbr_val MSRP=MSRP schema_org=schema_org}} <!-- muse+ custom price treatment -->
 {{else}}
     {{#if price.with_tax}}
         <div class="price-section price-section--withTax rrp-price--withTax" {{#unless price.rrp_with_tax}}style="display: none;"{{/unless}}>
@@ -34,12 +38,17 @@ If you are making a change here or in price-range.html, you probably want to mak
             <span class="price-label" {{#if price.non_sale_price_with_tax}}style="display: none;"{{/if}}>
                 {{theme_settings.pdp-price-label}}
             </span>
+			<!--
             <span class="price-now-label" {{#unless price.non_sale_price_with_tax}}style="display: none;"{{/unless}}>
                 {{> components/products/price-label
                     label_value=theme_settings.pdp-sale-price-label
                     fallback=(lang "page_builder.pdp-sale-price-label")
                 }}
             </span>
+			-->
+			 {{#unlessEq (getVar "cgroup_abbr_val") ""}}
+            <span class="price-now-label" {{#unless price.non_sale_price_with_tax}}style="display: none;"{{/unless}}>{{getVar "cgroup_abbr_val"}}:</span>
+            {{/unlessEq}}
             <span data-product-price-with-tax class="price price--withTax">{{price.with_tax.formatted}}</span>
             {{#if price.without_tax}}
                 <abbr title="{{lang 'products.including_tax'}}">{{lang 'products.price_with_tax' tax_label=price.tax_label}}</abbr>
@@ -47,51 +56,73 @@ If you are making a change here or in price-range.html, you probably want to mak
         </div>
     {{/if}}
     {{#if price.without_tax}}
-        <div class="price-section price-section--withoutTax rrp-price--withoutTax{{#if price.with_tax}} price-section--minor{{/if}}" {{#unless price.rrp_without_tax}}style="display: none;"{{/unless}}>
-            <span>
-                {{> components/products/price-label
-                    label_value=theme_settings.pdp-retail-price-label
-                    fallback=(lang "page_builder.pdp-retail-price-label")
-                }}
-            </span>
-            <span data-product-rrp-price-without-tax class="price price--rrp">
-                {{price.rrp_without_tax.formatted}}
+		
+		 <!-- MSRP {{MSRP}} price.without_tax.value {{price.without_tax.value}} -->
+        {{#isnt (toFloat MSRP) price.without_tax.value}}
+        {{#if MSRP}}
+        <div class="price-section price-section--withoutTax rrp-price--withoutTax{{#if price.with_tax}} price-section--minor{{/if}}">
+            {{theme_settings.pdp-retail-price-label}}
+            <span data-product-rrp-price-without-tax class="price price--rrp"> 
+                {{money (toFloat MSRP) 2 ',' '.'}}
+                
             </span>
         </div>
-        <div class="price-section price-section--withoutTax non-sale-price--withoutTax{{#if price.with_tax}} price-section--minor{{/if}}" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{/unless}}>
-            <span>
-                {{> components/products/price-label
-                    label_value=theme_settings.pdp-non-sale-price-label
-                    fallback=(lang "page_builder.pdp-non-sale-price-label")
-                }}
-            </span>
+        {{/if}}
+        {{/isnt}}
+		
+		{{#eq cgroup_abbr_val ""}}
+        <div class="customer-name-{{customer.name}} price-section price-section--withoutTax non-sale-price--withoutTax {{#if price.with_tax}}price-section--minor{{/if}}" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{/unless}}>
             <span data-product-non-sale-price-without-tax class="price price--non-sale">
                 {{price.non_sale_price_without_tax.formatted}}
             </span>
         </div>
-        <div class="price-section price-section--withoutTax">
+        {{/eq}}
+        <!--
+            price.rrp_without_tax.formatted {{price.rrp_without_tax.formatted}}
+            price.non_sale_price_without_tax {{price.non_sale_price_without_tax}}
+            price.non_sale_price_without_tax.formatted {{price.non_sale_price_without_tax.formatted}}
+            
+        -->
+        
+        <!--
+        <div class="price-section price-section--withoutTax non-sale-price--withoutTax{{#if price.with_tax}} price-section--minor{{/if}}" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{/unless}}>
+            {{theme_settings.pdp-non-sale-price-label}}
+            <span data-product-non-sale-price-without-tax class="price price--non-sale">
+                {{price.non_sale_price_without_tax.formatted}}
+            </span>
+        </div>
+        --> 
+        
+        <div class="price-section price-section--withoutTax" {{#if schema_org}}itemprop="offers" itemscope itemtype="http://schema.org/Offer"{{/if}}>
             <span class="price-label" {{#if price.non_sale_price_without_tax}}style="display: none;"{{/if}}>
                 {{theme_settings.pdp-price-label}}
             </span>
+            <!--
             <span class="price-now-label" {{#unless price.non_sale_price_without_tax}}style="display: none;"{{/unless}}>
-                {{> components/products/price-label
-                    label_value=theme_settings.pdp-sale-price-label
-                    fallback=(lang "page_builder.pdp-sale-price-label")
-                }}
+                {{theme_settings.pdp-sale-price-label}}
             </span>
+            -->
+            <!-- cgroup_abbr_val {{cgroup_abbr_val}} -->
+           {{#if cgroup_abbr_val}}
+            <span class="price-now-label" {{#or price.non_sale_price_without_tax price.rrp_without_tax MSRP}}style="padding-left: 5px"{{else}}style="display: none;"{{/or}}>{{cgroup_abbr_val}}:</span>
+            {{/if}}
             <span data-product-price-without-tax class="price price--withoutTax{{#if price.with_tax}} price-section--minor{{/if}}">{{price.without_tax.formatted}}</span>
             {{#if price.with_tax}}
                 <abbr title="{{lang 'products.excluding_tax'}}">{{lang 'products.price_without_tax' tax_label=price.tax_label}}</abbr>
             {{/if}}
         </div>
     {{/if}}
-    {{#if page_type '===' 'product'}}
-         <div class="price-section price-section--saving price" {{#unless price.saved}}style="display: none;"{{/unless}}>
-                <span class="price">{{lang 'products.you_save_opening_text'}}</span>
+     {{#if page_type '===' 'product'}}
+        {{#isnt (toFloat MSRP) price.without_tax.value}}
+        {{#if MSRP}}
+         <div class="price-section price-section--saving price">
+                <span class="price"></span>{{lang 'products.you_save_opening_text'}}</span>
                 <span data-product-price-saved class="price price--saving">
-                    {{price.saved.formatted}}
+                    {{money (subtract (toFloat MSRP) price.without_tax.value) 2 ',' '.'}}
                 </span>
                 <span class="price">{{lang 'products.you_save_closing_bracket'}}</span>
          </div>
+         {{/if}}
+         {{/isnt}}
     {{/if}}
 {{/and}}

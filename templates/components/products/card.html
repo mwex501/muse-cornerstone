@@ -1,3 +1,11 @@
+ <!-- Muse+ custom price treatment -->        
+    {{#filter custom_fields 'MSRP' property='name' }}
+      {{assignVar "MSRP" value}}
+    {{else}}
+        {{assignVar "MSRP" 0}}
+    {{/filter}}
+   <!--  [-{{getVar "MSRP"}}-] -->
+<!-- [cgroup {{customer.customer_group_name}}] -->
 <article
     class="card
     {{#if alternate}} card--alternate{{/if}}"
@@ -134,7 +142,7 @@
 
         <div class="card-text" data-test-info-type="price">
             {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
-                {{> components/products/price price=price}}
+                {{> components/products/price price=price cgroup_abbr_val=(getVar "cgroup_abbr_val") MSRP=(getVar "MSRP")}} <!-- muse+ custom price treatment -->
             {{else}}
                 {{> components/common/login-for-pricing}}
             {{/or}}

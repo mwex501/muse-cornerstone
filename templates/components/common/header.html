@@ -1,4 +1,5 @@
 <a href="#main-content" class="skip-to-main-link">{{lang 'header.skip_to_main'}}</a>
+{{{region name="header_bottom--global"}}} <!-- MUSE+ top global banner -->
 {{#if banners.top}}
 <div class="banners" data-banner-location="top">
     {{#each (limit banners.top_metadata 1)}}
@@ -11,6 +12,8 @@
 </div>
 {{/if}}
 <header class="header" role="banner">
+	
+		
     <a href="#" class="mobileMenu-toggle" data-mobile-menu-toggle="menu">
         <span class="mobileMenu-toggleIcon">Toggle menu</span>
     </a>
@@ -19,15 +22,30 @@
     {{#if page_type '===' 'default'}}
         <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
             {{> components/common/store-logo}}
+			<div class="header-search">
+				<form class="form" onsubmit="return false" data-url="/search.php">
+					<fieldset class="form-fieldset">
+						<div class="form-field">
+							<label class="is-srOnly" for="nav-quick-search">Search</label>
+							<input class="form-input" data-search-quick="" name="nav-quick-search" id="nav-quick-search" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
+							<input type="image" src="{{cdn 'assets/img/mag-glass.png'}}">
+						</div>
+					</fieldset>
+				</form>
+				<section class="quickSearchResults" data-bind="html: results"></section>
+				<p role="status" aria-live="polite" class="aria-description--hidden" data-search-aria-message-predefined-text="product results for"></p>
+			</div>
         </h1>
     {{else}}
         <div class="header-logo header-logo--{{theme_settings.logo-position}}">
             {{> components/common/store-logo}}
         </div>
     {{/if}}
+	
     <div class="navPages-container" id="menu" data-menu>
         {{> components/common/navigation-menu}}
     </div>
+
 </header>
-{{{region name="header_bottom--global"}}}
+
 {{{region name="header_bottom"}}}
