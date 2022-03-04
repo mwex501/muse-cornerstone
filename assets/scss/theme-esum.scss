@@ -1,0 +1,57 @@
+
+/* Esum Font */
+@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video  {font-family: 'Manrope',sans-serif !important;}
+
+.navUser-section .navUser-action, .navUser-section .navUser-or {font-size: 15px; font-weight: 800;}
+.navUser-section .navUser-action {padding-bottom: 5px;}
+.navPages-list .navUser-action {font-size: 18px; font-weight: 600;}
+.navPages-list .navPages-action {font-size: 18px; padding-bottom: 0px;}
+header.header {background-color: #161616;}
+header.header a, header.header, .navUser-or, .navUser-item--cart .navUser-action {color: #bababa; }
+.header-search input { background-color: #161616; border: #bababa solid 1px;}
+.navPages-container {margin-top:25px;}
+.navPages-action-moreIcon svg {fill: #ababab; stroke: #ababab;}
+#menu.navPages-container {border-bottom: #707070 1px solid;}
+
+@media screen and (min-width: 1301px) {
+		.header-logo__link {display: inline-block;
+			top: 7px;
+			margin-left: 30px;
+			position: absolute;}
+	
+	}
+	
+@media screen and (max-width: 1300px) {
+	.header-search {    display:none; }
+}
+
+header.is-open nav.navPages {background-color: #161616;}
+
+header.is-open .navPages-quickSearch {border-bottom: 2px solid #000; }
+header.is-open .navPages-list .navPages-action  { padding: .5rem 0;}
+header.is-open .navPage-subMenu-list .navPage-subMenu-item {padding: .5rem;}
+header.is-open .navPage-subMenu-list .navPage-subMenu-action  { padding: .0rem; }
+header.is-open .navPages-list--user {border-top: 2px solid #888;}
+header.is-open a, header.header, .navUser-or, .navUser-item--cart .navUser-action {color: #bababa; padding-bottom:15px;}
+
+
+
+.countPill {
+    background-color: #FFF;
+    color: #000;
+}
+

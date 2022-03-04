@@ -31,7 +31,7 @@
         <script>
             WebFont.load({
                 custom: {
-                    families: ['Karla', 'Roboto', 'Source Sans Pro']
+                    families: ['Nunito Sans','Roboto', 'Manrope','Karla', 'Source Sans Pro']
                 },
                 classes: false
             });
@@ -39,6 +39,12 @@
 
         {{ getFontsCollection }}
         {{{stylesheet '/assets/css/theme.css'}}}
+		<!--
+		{{{stylesheet '/assets/css/theme-kett.css'}}}
+		
+		{{{stylesheet '/assets/css/theme-muse.css'}}}
+		-->
+		{{{stylesheet '/assets/css/theme-esum.css'}}}
 
         {{{head.scripts}}}
 
@@ -60,8 +66,8 @@
         {{~inject 'carouselContentAnnounceMessage' (lang 'carousel.content_announce_message')}}
 		
 		<!--
-            {{assignVar "cgroup_names" "Pro Member 30/00,Wholesale 60/40,Distributor 70/50,Wholesale 50/30,Retail"}}
-            {{assignVar "cgroup_abbr" "Pro,Whls+,Dist,Whls,Retail"}}
+            {{assignVar "cgroup_names" "Pro Member,Pro Member 30/00,Wholesale 60/40,Distributor 70/50,Wholesale 50/30,Retail"}}
+            {{assignVar "cgroup_abbr" "Pro,Pro,Whls+,Dist,Whls,Retail"}}
             {{assignVar "cgroup_index" -1}}
             {{assignVar "cgroup_name" "-none-"}} 
             {{#if customer.customer_group_name}}{{assignVar "cgroup_name" customer.customer_group_name}}{{/if}}

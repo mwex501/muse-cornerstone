@@ -1,3 +1,12 @@
+
+{{#filter product.custom_fields 'MSRP' property='name' }}
+      {{assignVar "MSRP" value}}
+    {{else}}
+        {{assignVar "MSRP" 0}}
+    {{/filter}}
+   <!--  [-{{getVar "MSRP"}}-] -->
+<!-- [cgroup {{customer.customer_group_name}}] -->
+
 <div class="productView"
     {{#if settings.data_tag_enabled}}
     data-event-type="product"
@@ -107,7 +116,7 @@
             {{/if}}
             <div class="productView-price">
                 {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
-                    {{> components/products/price price=product.price}}
+                    {{> components/products/price price=product.price cgroup_abbr_val=(getVar "cgroup_abbr_val") MSRP=(getVar "MSRP") schema_org=schema}}
                 {{else}}
                     {{> components/common/login-for-pricing}}
                 {{/or}}
