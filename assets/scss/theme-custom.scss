@@ -7,6 +7,7 @@ div[data-content-region="home_below_menu_desktop"] {display: none;}
 div[data-content-region="home_below_menu_mobile"] {display: none;}
 }
 
+
 .price-section {display: inline-block; font-weight: bold;}
 
 main.body {margin-top: 0px;}
@@ -92,8 +93,14 @@ position: relative;
 	margin-left: 0px;
 }
 
+.quickSearchResults {display: none; }
+
+article.blog .blog-thumbnail {display:none;}
+section.page article.blog .blog-thumbnail {display: block;}
+
 .filter-mobile { display:none;}
 .filter-desktop {display:block;}
+
 
 @media screen and (max-width: 800px) {
 
@@ -153,3 +160,4 @@ position: relative;
 			max-width: 27px;
 	}
 };
+

@@ -32,6 +32,7 @@ category:
 {{/unless}}
 {{{category.description}}}
 <div class="page">
+	<div class="filter-mobile">{{> components/products/filter sort=pagination.category.sort}}</div>
     {{#if category.faceted_search_enabled}}
         <aside class="page-sidebar" id="faceted-search-container">
             {{> components/category/sidebar}}
@@ -47,12 +48,13 @@ category:
             </aside>
         {{/if}}
     {{/if}}
-	    {{> components/products/filter sort=pagination.category.sort}}
+	    
 
     <div class="page-content" id="product-listing-container">
         {{> components/category/product-listing}}
         {{{region name="category_below_content"}}}
     </div>
+	
 </div>
 
 {{/partial}}
