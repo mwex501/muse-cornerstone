@@ -23,11 +23,11 @@
         <h1 class="header-logo header-logo--{{theme_settings.logo-position}}">
             {{> components/common/store-logo}}
 			<div class="header-search">
-				<form class="form" onsubmit="return false" data-url="/search.php">
+				<form class="form" action="/search.php">
 					<fieldset class="form-fieldset">
 						<div class="form-field">
 							<label class="is-srOnly" for="nav-quick-search">Search</label>
-							<input class="form-input" data-search-quick="" name="nav-quick-search" id="nav-quick-search" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
+							<input class="form-input" data-search-quick="" name="search_query" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
 							<input type="image" src="{{cdn 'assets/img/mag-glass.png'}}">
 						</div>
 					</fieldset>
@@ -40,11 +40,11 @@
         <div class="header-logo header-logo--{{theme_settings.logo-position}}">
             {{> components/common/store-logo}}
 			<div class="header-search">
-				<form class="form" onsubmit="return false" data-url="/search.php">
+				<form class="form" action="/search.php">
 					<fieldset class="form-fieldset">
 						<div class="form-field">
 							<label class="is-srOnly" for="nav-quick-search">Search</label>
-							<input class="form-input" data-search-quick="" name="nav-quick-search" id="nav-quick-search" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
+							<input class="form-input" data-search-quick="" name="search_query" data-error-message="Search field cannot be empty." placeholder="Search the store" autocomplete="off">
 							<input type="image" src="{{cdn 'assets/img/mag-glass.png'}}">
 						</div>
 					</fieldset>

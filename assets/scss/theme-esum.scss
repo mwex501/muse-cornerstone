@@ -25,7 +25,7 @@ header.header {background-color: #161616;}
 header.header a, header.header, .navUser-or, .navUser-item--cart .navUser-action {color: #bababa; }
 .header-search input { background-color: #161616; border: #bababa solid 1px;}
 .navPages-container {margin-top:25px;}
-.navPages-container nav.navPages {text-align: right;}
+.navPages-container:not(.is-open) nav.navPages {text-align: right;}
 .navPages-action-moreIcon svg {fill: #ababab; stroke: #ababab;}
 #menu.navPages-container {border-bottom: #707070 1px solid;}
 
