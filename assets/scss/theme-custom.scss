@@ -14,7 +14,7 @@ main.body {margin-top: 0px;}
 
 
 .header-logo {position:relative;}
-.header-logo__link {display:inline;}
+.header-logo__link {display:block;} /* inline is not clickable in mobile */
 .header-search {    width: 368px;
     display: inline-block;
     height: 40px;
