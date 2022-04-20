@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html class="no-js" lang="{{ locale_name }}">
     <head>
         <title>{{ head.title }}</title>
@@ -39,12 +40,7 @@
 
         {{ getFontsCollection }}
         {{{stylesheet '/assets/css/theme.css'}}}
-		<!--
-		{{{stylesheet '/assets/css/theme-kett.css'}}}
-		
-		{{{stylesheet '/assets/css/theme-muse.css'}}}
-		-->
-		{{{stylesheet '/assets/css/theme-esum.css'}}}
+		{{{stylesheet theme_settings.stylesheet}}}
 
         {{{head.scripts}}}
 
@@ -93,6 +89,7 @@
 		--> 
     </head>
     <body>
+	
         <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
 
         {{> components/common/header }}

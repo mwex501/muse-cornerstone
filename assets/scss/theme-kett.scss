@@ -18,3 +18,13 @@ time, mark, audio, video  {font-family: 'Nunito Sans',sans-serif !important;}
 .navUser-section .navUser-action {font-size: 15px; font-weight: 800;}
 
 .navPages-list .navUser-action {font-size: 15px; font-weight: 600;}
+
+.is-open .navPages, .navPage-subMenu, .navPages-action.is-open {background-color: #DFDFE7;}
+.navPages-action.is-open {color: #919195;}
+.navPage-subMenu-action, .navPage-childList-action {text-transform: none;}
+.header-logo-image-container {margin-top: 5px;}
+
+@media screen and (max-width: 800px) {
+	.navPages-action {    font-size:17px; font-weight: 400;}
+}
+

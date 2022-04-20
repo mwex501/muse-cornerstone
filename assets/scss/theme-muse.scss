@@ -11,3 +11,8 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video  {font-family: 'Roboto',sans-serif !important;}
+
+.is-open .navPages, .navPage-subMenu, .navPages-action.is-open {background-color: #DFDFE7;}
+.navPages-action.is-open {color: #919195;}
+.navPage-subMenu-action, .navPage-childList-action {text-transform: none;}
+.header-logo-image-container {margin-top: 5px;}
