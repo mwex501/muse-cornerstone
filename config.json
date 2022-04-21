@@ -362,7 +362,7 @@
       "settings": {
 		  "logo-position" : "left",
 		  "logo_size": "300x65",
-		  "stylesheet": "/assets/css/ theme-esum.css"
+		  "stylesheet": "/assets/css/theme-esum.css"
 	  }
     },
     {
