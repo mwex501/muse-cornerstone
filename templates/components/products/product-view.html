@@ -281,7 +281,68 @@
 </div>
 
 <div id="previewModal" class="modal modal--large" data-reveal>
-    {{> components/common/modal/modal-close-btn }}
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
     <div class="modal-content"></div>
     <div class="loadingOverlay"></div>
 </div>
+<script>
+//Close Popup in Pick List
+function closePopup(clid) {
+   var sc = $(clid).attr('id');
+   $(".popup-overlay-"+sc+", #open-"+sc).removeClass("active");
+}
+function openPopup(opid) {
+   var sc = $(opid).attr('id');
+   $(".popup-overlay-"+sc+", #open-"+sc).addClass("active");
+}
+</script>
+<script>
+	$(function(){
+		$('.productOptions-list').each(function(index){
+			if($(this).find(".productOptions-list-item:has(input:checked)" )) {
+				$(this).find(".productOptions-list-item:has(input:not(:checked))" ).hide();
+				$(this).find('.productOptions-list-item:nth-child(1)').hide();
+				$(this).prepend("<li class='productOptions-list-item-empty' onClick='showOptions(this);' style='font-size:14px;'>Choose Option</li>");
+			};
+		});
+		
+	});
+    function showOptions(el){
+		console.log('showOptions');
+        if($(el).hasClass('productOptions-list-item-empty')) 
+        $(el).closest('ul').find(".productOptions-list-item" ).show();
+		$( ".productOptions-list-item input[type=radio]").off().click(function(){
+				console.log('click ON');
+			 selectOption(this);
+		});
+    };
+     function hideChangeOptions(el){
+		console.log('hideChangeOptions');
+        $(el).closest("span").hide();
+        $(el).closest('ul').find(".productOptions-list-item-empty-1" ).hide();
+        $(el).closest('ul').find(".productOptions-list-item-empty" ).show();
+        $(el).closest('ul').find(".productOptions-list-item").show();
+        $(el).closest('ul li').find("input").show();
+        $(el).closest('ul').find(".productOptions-list-item .list_detail").show();
+        $(el).closest("span.select_item1").attr('class','select_item');
+		$( ".productOptions-list-item input[type=radio]").off().click(function(){
+				console.log('click ON');
+			 selectOption(this);
+		});
+    };
+    function selectOption(el){
+		console.log('selectOption');
+        $(el).closest('ul').find(".productOptions-list-item-empty").hide();
+        $(el).closest('ul').find(".productOptions-list-item .list_detail").hide();
+        $(el).after("<span class='pick_list_right'><span class='change_option'><span class='slected_msg'>Selected</span><a href='javascript:void(null);' onClick='hideChangeOptions(this);' class='change_btn'>Change</a></span></span>");
+        $(el).hide();
+        $(el).closest("span").attr('class','select_item1');
+        $(el).closest('ul').find( ".productOptions-list-item:has(input:not(:checked))" ).hide();
+        $( ".productOptions-list-item input[type=radio]").off().click(function(){
+			console.log('click OFF');
+		});
+    };
+    
+</script>

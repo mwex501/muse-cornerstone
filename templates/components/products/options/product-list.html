@@ -1,6 +1,6 @@
-<div class="form-field" data-product-attribute="product-list" role="radiogroup" aria-labelledby="product-list-label">
-    <label class="form-label form-label--alternate form-label--inlineSmall" id="product-list-label">
-        {{display_name}}:
+<div class="form-field" data-product-attribute="product-list">
+    <label class="form-label form-label--alternate form-label--inlineSmall">
+		   {{display_name}}:
         <span data-option-value></span>
 
         {{> components/common/requireness-msg}}
@@ -14,23 +14,22 @@
                            type="radio"
                            name="attribute[{{id}}]"
                            value=""
-                           id="attribute_productlist_{{id}}_none"
+                           id="attribute_productlist_{{../id}}_none"
                            checked="{{#if defaultValue '==' ''}}checked{{/if}}">
-                    <label class="form-label" for="attribute_productlist_{{id}}_none">{{lang 'products.none'}}</label>
+                    <label class="form-label" for="attribute_productlist_{{../id}}_none">{{lang 'products.none'}}</label>
                 </li>
             {{/unless}}
             {{#each values}}
                 <li class="productOptions-list-item" data-product-attribute-value="{{id}}">
                     {{#if image}}
                         <figure class="productOptions-list-item-figure">
-                            {{> components/common/responsive-img
-                                image=image
-                                class="productOptions-list-item-image"
-                                lazyload='lazyload+lqip'
-                            }}
+                            <img class="productOptions-list-item-image" data-sizes="auto" src="{{getImage image 'productthumb_size'}}" alt="{{image.alt}}" title="{{image.alt}}">
                         </figure>
                     {{/if}}
-                    <div class="productOptions-list-item-content">
+                     <div class="productOptions-list-item-content">
+                        <span class="form-label" for="attribute_productlist_{{../id}}_{{id}}">{{label}} 
+                        </span>
+                        <span class="select_item">
                         <input
                             class="form-radio"
                             type="radio"
@@ -40,11 +39,32 @@
                             {{#if selected}}
                                 checked
                                 data-default
-                            {{/if}}
-                            {{#if ../required}}required{{/if}}>
-                        <label data-product-attribute-value="{{id}}" class="form-label" for="attribute_productlist_{{../id}}_{{id}}">{{label}}</label>
+                            {{/if}} {{#if ../required}}required{{/if}}>
+                          
+                        </span>
+                        <span class="list_detail" id="{{id}}" onclick="openPopup(this)">Detail</span>
+                        <div class="pickProductInfo">
+                            <span class="pickProductPrice pickProductPrice-{{id}}"></span>
+                            <span class="pickProductStock pickProductStock-{{id}}"></span>
+                        </div>
                     </div>
+                  
+
                 </li>
+                    <div class="popup-overlay popup-overlay-{{id}}">
+                    <span id="{{id}}" class="close_box" onclick="closePopup(this)">x</span>
+                    <div id="open-{{id}}" class="popup-content">
+                        <div class="productOptions-list-item-popup" data-product-attribute-value="{{id}}">
+                            {{#if image}}
+                                <figure class="prd_image">
+                                    <img class="productOptions-list-item-image" data-sizes="auto" src="{{getImage image '500x500'}}" alt="{{image.alt}}" title="{{image.alt}}">
+                                </figure>
+                            {{/if}}
+                            <span class="prd_title form-label" for="attribute_productlist_{{../id}}_{{id}}">{{label}}</span>
+                
+                        </div>
+                    </div>
+                </div>
             {{/each}}
         </ul>
     {{else}}
@@ -70,3 +90,4 @@
         {{/each}}
     {{/if}}
 </div>
+
