@@ -456,3 +456,5 @@ popup-overlay {
     opacity: 0;
     cursor: pointer;
 }
+
+.header-search {z-index: 10000;} /* https://whirlwind.teamwork.com/#/tasks/27675878 */
