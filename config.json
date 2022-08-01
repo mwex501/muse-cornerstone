@@ -377,6 +377,8 @@
         "industries": []
       },
       "settings": {
+		  "optimizedCheckout-header-backgroundColor": "#FFFFFF",
+		  "fontSize-root": 16,
         "logo-position" : "center",
 		"logo_size": "250x100",
 		  "stylesheet": "/assets/css/theme-muse.css"
@@ -394,6 +396,7 @@
         "industries": []
       },
       "settings": {
+		  "optimizedCheckout-header-backgroundColor": "#FFFFFF",
 		"logo-position" : "center",
 		"logo_size": "150x60",
 		  "stylesheet": "/assets/css/theme-kett.css"

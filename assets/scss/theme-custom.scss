@@ -458,3 +458,7 @@ popup-overlay {
 }
 
 .header-search {z-index: 10000;} /* https://whirlwind.teamwork.com/#/tasks/27675878 */
+
+@media screen and (max-width: 1200px) {
+	.header-search {    display:none; }
+}
