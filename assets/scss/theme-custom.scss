@@ -462,3 +462,23 @@ popup-overlay {
 @media screen and (max-width: 1200px) {
 	.header-search {    display:none; }
 }
+
+/* https://whirlwind.teamwork.com/#/tasks/28041476 */
+.card-body {
+    text-align: center;
+}
+
+.card-body .card-text {
+	font-size: 16px;
+}
+
+.card-body .card-text[data-test-info-type="brandName"] {
+    font-size: 14px;
+}
+
+.card-title {
+	font-size: 16px;
+}
+
+/* https://whirlwind.teamwork.com/#/tasks/28397484 */
+header.header .header-logo {z-index: 1;}

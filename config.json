@@ -381,7 +381,8 @@
 		  "fontSize-root": 16,
         "logo-position" : "center",
 		"logo_size": "250x100",
-		  "stylesheet": "/assets/css/theme-muse.css"
+		  "stylesheet": "/assets/css/theme-muse.css",
+		  "shop_by_brand_show_footer": true
       }
     },
     {
