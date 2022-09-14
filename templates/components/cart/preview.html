@@ -93,6 +93,31 @@
                         </dl>
                     {{/each}}
                 </div>
+				<script>
+					// Measure adding a product to a shopping cart by using an 'add' actionFieldObject
+					// and a list of productFieldObjects.
+					dataLayer.push({ ecommerce: null });  // Clear the previous ecommerce object.
+					dataLayer.push({
+					  'event': 'addToCart',
+					  'ecommerce': {
+						'currencyCode': 'USD',
+						'add': {                                // 'add' actionFieldObject measures.
+						  'products': [{                        //  adding a product to a shopping cart.
+							'name': '{{name}}',
+							'id': '{{sku}}',
+							'price': '{{price.value}}',
+							'brand': '{{brand.name}}',
+							//'category': '{{category}}',
+							//'variant': 'Gray',
+							'quantity': {{quantity}}
+						   }]
+						}
+					  }
+					});
+					
+					ga("ec:addProduct", {name: "{{name}}", id: "{{sku}}", price: "{{price.value}}", quantity: {{quantity}} });
+					ga("send", {hitType: "event", eventCategory: "Ecommerce", eventAction: "addToCart", eventLabel: "product", eventValue: 0});
+				</script>
             {{/with}}
         </section>
     </div>
