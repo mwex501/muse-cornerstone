@@ -10,7 +10,7 @@
     "author_support_url": "https://support.bigcommerce.com/",
     "composed_image": "composed.png",
     "features": [
-      
+      "customized_checkout"
     ]
   },
   "css_compiler": "scss",
