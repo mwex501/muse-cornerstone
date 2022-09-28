@@ -1,5 +1,13 @@
 .header-logo{margin:0!important;}
 
+
+@media screen and (max-width: 1200px) {
+	.header-logo{    max-width: 150px;
+		margin: auto !important;
+		z-index: 6;
+		}
+	}
+
 @media screen and (max-width: 800px) {
 div[data-content-region="home_below_menu_desktop"] {display: none;}
 }
