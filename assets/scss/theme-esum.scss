@@ -20,10 +20,14 @@ time, mark, audio, video  {font-family: 'Manrope',sans-serif !important;}
 #form-action-addToCart {font-family: manrope, sans-serif;}
 .shogun-heading-component h1 {font-family: STIX TWO TEXT !important; font-size: 32px;}
 
-.navUser-section .navUser-action, .navUser-section .navUser-or {font-size: 15px; font-weight: 800;}
+.navUser-section .navUser-action, .navUser-section .navUser-or {font-size: 14px; font-weight: 800;}
 .navUser-section .navUser-action {padding-bottom: 5px;}
-.navPages-list .navUser-action {font-size: 18px; font-weight: 600;}
-.navPages-list .navPages-action {font-size: 18px; padding-bottom: 0px; padding-top: 4px; margin-top: 10px;}
+.navPages-list .navUser-action {font-size: 16px; font-weight: 600;}
+.navPages-list .navPages-action {font-size: 16px; padding-bottom: 0px; padding-top: 4px; margin-top: 10px;}
+
+@media screen and (max-width: 1400px) {
+	.navPages-list .navPages-action {font-size: 14px;}
+}
 
 header.header {background-color: #161616;}
 header.header a, header.header, .navUser-or, .navUser-item--cart .navUser-action {color: #bababa; }

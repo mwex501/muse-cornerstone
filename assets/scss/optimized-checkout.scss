@@ -379,3 +379,6 @@ $optimizedCheckout-input--error-boxShadow: 0 0 3px transparentize(stencilColor("
     background-color: stencilColor("optimizedCheckout-loadingToaster-backgroundColor");
     color: stencilColor("optimizedCheckout-loadingToaster-textColor");
 }
+/* https://whirlwind.teamwork.com/#/tasks/29349956 */
+#checkout-customer-guest #googlepaybraintreeCheckoutButton {display: none;}
+#checkout-customer-guest .form-body>p:nth-child(3) {display: none;}
