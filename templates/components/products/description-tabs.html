@@ -1,3 +1,4 @@
+
 <ul class="tabs" data-tab>
     {{#if product.description}}
         <li class="tab is-active">
@@ -20,11 +21,12 @@
     {{/all}}
     {{#all settings.show_product_reviews theme_settings.show_product_reviews product.reviews.total}}
         <li class="tab">
-            <a class="tab-title productView-reviewTabLink" href="#tab-reviews">{{lang 'products.reviews.header' total=product.reviews.total}}</a>
+            <a class="tab-title productView-reviewTabLink" href="#tab-reviews" onClick="if(!$('.productReviews .toggleLink').hasClass('is-open')) $('.productReviews .toggleLink-text--off').click();">{{lang 'products.reviews.header' total=product.reviews.total}}</a>
         </li>
     {{/all}}
 </ul>
 <div class="tabs-contents">
+
     {{#if product.description}}
         <div class="tab-content is-active" id="tab-description">
             {{{product.description}}}
@@ -45,9 +47,12 @@
          </dl>
       </div>
     {{/all}}
+	
     {{#all settings.show_product_reviews theme_settings.show_product_reviews}}
        <div class="tab-content" id="tab-reviews">
            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
        </div>
     {{/all}}
+	
 </div>
+
