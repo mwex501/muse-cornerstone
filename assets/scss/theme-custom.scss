@@ -492,3 +492,56 @@ popup-overlay {
 header.header .header-logo {z-index: 1;}
 /* https://whirlwind.teamwork.com/#/tasks/28925638 */
 header .header-search .form-field {margin: 0px;}
+
+.img-res-cat{display: none; margin-left: auto; margin-right: auto;}
+
+@media screen and (max-width: 550px) {
+	.img-res-cat {margin-top: 20px;}
+} 
+
+
+@media screen and (min-width: 1326px) {
+	.img-1092-cat {display: block;}
+} 
+
+@media screen and (max-width: 1325px) and (min-width: 976px) {
+	.img-900-cat {display: block;}
+}
+
+@media screen and (max-width: 975px) and (min-width: 851px) {
+	.img-790-cat {display: block;}
+}
+
+@media screen and (max-width: 850px) and (min-width: 701px) {
+	.img-640-cat {display: block;}
+}
+
+@media screen and (max-width: 700px) and (min-width: 551px) {
+	.img-490-cat {display: block;}
+}
+
+@media screen and (max-width: 550px) and (min-width: 401px) {
+	.img-340-cat {display: block;}
+}
+
+@media screen and (max-width: 400px) and (min-width: 375px) {
+	.img-315-cat {display: block;}
+}
+
+@media screen and (max-width: 374px) and (min-width: 301px) {
+	.img-240-cat {display: block;}
+}
+
+@media screen and (max-width: 300px) {
+	.img-240-cat {display: block; width: 100%; height: auto;}
+}
+
+.img-res-logo{display: none;}
+
+@media screen and (max-width: 1199px) {
+	.img-105-logo {display: block;}
+	}
+@media screen and (min-width: 1200px) {
+	.img-268-logo {display: block;}
+	}	
+	
