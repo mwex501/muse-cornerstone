@@ -1,11 +1,15 @@
 
+
 <ul class="tabs" data-tab>
-    {{#if product.description}}
-        <li class="tab is-active">
-            <a class="tab-title" href="#tab-description">{{lang 'products.description'}}</a>
-        </li>
-    {{/if}}
-    {{#if product.warranty}}
+	<li class="tab is-active"><a class="tab-title" href="#tab-1">Description</a></li>
+	{{assignVar "loopno" 1}}
+	{{#each (split product.description "||") as |item i|}}
+		{{#startsWith "Tab:" item}}
+			<li class="tab"><a class="tab-title" href="#tab-{{incrementVar "loopno"}}">{{{strReplace item "Tab:" " "}}}</a></li>
+		{{else}}
+		{{/startsWith}}
+	{{/each}}
+	{{#if product.warranty}}
         <li class="tab {{#unless product.description}}is-active{{/unless}}">
             <a class="tab-title" href="#tab-warranty">{{lang 'products.warranty'}}</a>
         </li>
@@ -26,13 +30,14 @@
     {{/all}}
 </ul>
 <div class="tabs-contents">
-
-    {{#if product.description}}
-        <div class="tab-content is-active" id="tab-description">
-            {{{product.description}}}
-        </div>
-    {{/if}}
-    {{#if product.warranty}}
+{{assignVar "loopno" 0}}
+	{{#each (split product.description "||") as |item i|}}
+		{{#startsWith "Tab:" item}}
+		{{else}}
+		<div class="tab-content {{#if (incrementVar "loopno") '===' 1}}is-active{{/if}}" id="tab-{{getVar "loopno"}}">{{{item}}}</div>
+		{{/startsWith}}
+	{{/each}}
+	{{#if product.warranty}}
         <div class="tab-content {{#unless product.description}}is-active{{/unless}}" id="tab-warranty">
             {{{product.warranty}}}
         </div>
@@ -53,6 +58,5 @@
            {{> components/products/reviews reviews=product.reviews product=product urls=urls}}
        </div>
     {{/all}}
-	
 </div>
 
