@@ -71,7 +71,11 @@
                     </a>
                 {{/if}}
             </div>
+			
         </figure>
+		<div class="productView-video-container">
+				<iframe width="528" height="528" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+			</div>
         <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
                 "infinite": false,
                 "mobileFirst": true,
@@ -89,6 +93,7 @@
                         data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
                         data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
                         data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+						onclick="return productViewImage();"
                     >
                     {{> components/common/responsive-img
                         image=this
@@ -98,8 +103,60 @@
                     </a>
                 </li>
             {{/each}}
+			<!-- videos -->
+			{{#each product.custom_fields}}
+				{{#if name '==' 'Video'}}
+				<li class="productView-thumbnail productView-video-thumbnail">
+					<a
+                        class="productView-thumbnail-link"
+                        href="https://www.youtube.com/embed/{{{ sanitize value}}}"
+						onClick="return productViewVideo(this);"
+                    >
+                    <img src="https://img.youtube.com/vi/{{{ sanitize value}}}/0.jpg">
+					</a>
+					<span class="play-button">&#9658;</span>
+				</li>
+				{{/if}}
+			{{/each}}
         </ul>
     </section>
+	<script>
+		function productViewVideo(e){
+			$('.productView-image').css('display','none');
+			$('.productView-video-container iframe').attr('src',$(e).attr('href'));
+			$('.productView-video-container').css('display','block');
+			return false;
+		};
+		function productViewImage(){
+			$('.productView-image').css('display','block');
+			$('.productView-video-container iframe').attr('src','');
+			$('.productView-video-container').css('display','none');
+			return true;
+		};
+	</script>
+	<style>
+	.productView-video-container {display:none;}
+	.productView-thumbnail.productView-video-thumbnail {position: relative;}
+	.productView-thumbnail.productView-video-thumbnail .play-button {
+		position:absolute;
+		left: calc(50% - 5px);
+		top: 50%;
+		transform: translate(-50%, -50%);
+		background-color: #F00;
+		display: inline-block;
+		border-radius: 5px;
+		width: 30px;
+		height: 20px;
+		line-height: 20px;
+		color: #FFF;
+		font-size: 14px;
+		opacity: .6;
+		pointer-events: none;
+		}
+	.productView-thumbnail.productView-video-thumbnail:hover .play-button {
+		opacity: 1;
+	};
+	</style>
 
     <section class="productView-details product-data">
         <div class="productView-product">
@@ -223,13 +280,16 @@
                         {{> components/products/bulk-discount-rates bulk_discount_rates=product.bulk_discount_rates}}
                     </div>
                 {{/if}}
-
+<!-- remove per https://whirlwind.teamwork.com/app/tasks/30753931
                 {{#if theme_settings.show_custom_fields_tabs '!==' true}}
                     {{#each product.custom_fields}}
+						{{#if name '!==' 'Video'}}
                         <dt class="productView-info-name">{{name}}:</dt>
                         <dd class="productView-info-value">{{{ sanitize value}}}</dd>
+						{{/if}}
                     {{/each}}
                 {{/if}}
+				-->
             </dl>
         </div>
     </section>
@@ -256,6 +316,9 @@
                     </label>
                 </div>
                 {{> components/products/add-to-cart}}
+
+
+				 {{> components/common/KSPs}}
                 {{#if product.out_of_stock}}
                     {{#if product.out_of_stock_message}}
                         {{> components/common/alert/alert-error product.out_of_stock_message}}

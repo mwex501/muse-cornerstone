@@ -25,17 +25,7 @@
                  </li>
              {{/each}}
         {{/unless}}
-		<!-- show brands link only in muse -->
-		 {{#if settings.request.host '==' 'musebeauty.pro'}}
-        <li class="navPages-item navPages-item-page">
-             <a class="navPages-action{{#if '/brands/' '==' ../page.title}} activePage{{/if}}"
-                href="/brands/"
-                aria-label="Brands"
-             >
-                 Brands
-             </a>
-         </li>
-         {{/if}}
+	
     </ul>
     <ul class="navPages-list navPages-list--user">
         {{#if currency_selector.currencies.length '>' 1}}
