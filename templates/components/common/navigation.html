@@ -5,7 +5,7 @@
 
     <ul class="navUser-section navUser-section--alt">
         {{#if customer.store_credit.value '>' 0}}
-            <li class="navUser-item">
+            <li class="navUser-item navUser-item--storeCredit">
                 <a class="navUser-action navUser-action--storeCredit"
                    data-dropdown="storeCredit-dropdown"
                    data-options="align:bottom"
@@ -21,7 +21,7 @@
                 </div>
             </li>
         {{/if}}
-        <li class="navUser-item">
+        <li class="navUser-item navUser-item--compare">
             <a class="navUser-action navUser-item--compare"
                href="{{urls.compare}}"
                data-compare-nav
@@ -36,7 +36,8 @@
             </li>
             <li class="navUser-item navUser-item--divider">|</li>
         {{/if}}
-        <li class="navUser-item">
+
+        <li class="navUser-item navUser-item--quickSearch">
             <button class="navUser-action navUser-action--quickSearch"
                type="button"
                id="quick-search-expand"
@@ -47,8 +48,9 @@
                 {{lang 'common.search'}}
             </button>
         </li>
+	
         {{#if settings.gift_certificates_enabled}}
-            <li class="navUser-item">
+            <li class="navUser-item navUser-item-giftCerts">
                 <a class="navUser-action"
                    href="{{urls.gift_certificate.purchase}}"
                    aria-label="{{lang 'common.gift_cert'}}"

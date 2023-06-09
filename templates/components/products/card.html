@@ -5,6 +5,16 @@
         {{assignVar "MSRP" 0}}
     {{/filter}}
    <!--  [-{{getVar "MSRP"}}-] -->
+   
+    <!-- Muse+ label treatment -->        
+    {{#filter custom_fields 'label' property='name' }}
+      {{assignVar "label" value}}
+    {{else}}
+        {{assignVar "label" 0}}
+    {{/filter}}
+   <!--  [-{{getVar "label"}}-] -->
+   
+   
 <!-- [cgroup {{customer.customer_group_name}}] -->
 <article
     class="card
@@ -36,6 +46,8 @@
         {{/or}}"
     {{/if}}>
     <figure class="card-figure">
+	
+	
         {{#if stock_level '===' 0}}
             {{#if theme_settings.pdp_sold_out_label '===' ''}}
                 {{> components/products/product-badge
@@ -50,6 +62,12 @@
                     badge_label=theme_settings.pdp_sold_out_label
                 }}
             {{/if}}
+		{{else if (getVar "label") '!=' 0}}
+			{{> components/products/product-badge
+                    badge-type='sale'
+                    badge_view='topleft'
+                    badge_label=(getVar "label")
+                }}
         {{else}}
             {{#or price.sale_price_with_tax.value price.sale_price_without_tax.value}}
                 {{#if theme_settings.pdp_sale_badge_label '===' ''}}

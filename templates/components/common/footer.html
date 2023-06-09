@@ -22,18 +22,10 @@
 <footer class="footer" role="contentinfo">
     <h2 class="footer-title-sr-only">{{lang 'footer.title'}}</h2>
     <div class="container">
-        {{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
-            <article class="footer-info-col
-                footer-info-col--social
-                footer-info-col--{{#if theme_settings.social_icon_placement_bottom '===' 'bottom_left'}}left{{else}}right{{/if}}"
-                data-section-type="footer-webPages">
-                    <h3 class="footer-info-heading">{{lang 'social.connect'}}</h3>
-                    {{> components/common/social-links}}
-            </article>
-        {{/if}}
+       
         <section class="footer-info">
             <article class="footer-info-col footer-info-col--small" data-section-type="footer-webPages">
-                <h3 class="footer-info-heading">{{lang 'footer.navigate'}}</h3>
+                <h3 class="footer-info-heading">About {{theme_settings.site_name}}</h3>
                 <ul class="footer-info-list">
                     {{#each pages}}
                         <li>
@@ -70,7 +62,19 @@
                 </ul>
             </article>
             {{/and}}
+			
+			<article class="footer-info-col footer-info-col--small" data-section-type="storeInfo">
+                <h3 class="footer-info-heading">Need Help?</h3>
+				 <ul class="footer-info-list">
+					 <li><a href="/contact-us/">Contact Us</a></li>
+					 <li><a href="/accessibility/">Accessibility</a></li>
+					 <li><a href="/shipping-returns/">Shipping & Returns</a></li>
+					 <li><a href="/privacy-policy/">Privacy Policy</a></li>
+					 <li><a href="tel:888.393.3963">888.393.3963</a></li>
+				 </ul>
+            </article>
 
+<!--
             {{#if settings.address}}
             <article class="footer-info-col footer-info-col--small" data-section-type="storeInfo">
                 <h3 class="footer-info-heading">{{lang 'footer.info'}}</h3>
@@ -80,8 +84,14 @@
                 {{/if}}
             </article>
             {{/if}}
-
+-->
             <article class="footer-info-col" data-section-type="newsletterSubscription">
+			
+				{{#if theme_settings.social_icon_placement_bottom '!==' 'bottom_none'}}
+						<h3 class="footer-info-heading">{{lang 'social.connect'}}</h3>
+						{{> components/common/social-links}}
+				{{/if}}
+			
                 {{#if settings.show_newsletter_box}}
                     {{> components/common/subscription-form}}
                 {{/if}}

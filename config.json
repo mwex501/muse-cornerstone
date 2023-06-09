@@ -362,7 +362,8 @@
       "settings": {
 		  "logo-position" : "left",
 		  "logo_size": "300x65",
-		  "stylesheet": "/assets/css/theme-esum.css"
+		  "stylesheet": "/assets/css/theme-esum.css",
+		  "site_name": "ESUM"
 	  }
     },
     {
@@ -382,7 +383,8 @@
         "logo-position" : "center",
 		"logo_size": "250x100",
 		  "stylesheet": "/assets/css/theme-muse.css",
-		  "shop_by_brand_show_footer": true
+		  "shop_by_brand_show_footer": true,
+			"site_name" : "MUSE"
       }
     },
     {
@@ -400,7 +402,8 @@
 		  "optimizedCheckout-header-backgroundColor": "#FFFFFF",
 		"logo-position" : "center",
 		"logo_size": "150x60",
-		  "stylesheet": "/assets/css/theme-kett.css"
+		  "stylesheet": "/assets/css/theme-kett.css",
+		  "site_name" : "KETT"
       }
     }
   ]

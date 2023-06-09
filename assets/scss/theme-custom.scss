@@ -71,8 +71,8 @@ position: relative;
 }
 
 
-
-.navUser-section li:nth-child(1), .navUser-section li:nth-child(2),.navUser-section li:nth-child(3), .navUser-section li:nth-child(4) {display:none;}
+.navUser-item--storeCredit, .navUser-item--compare, .navUser-item--social, .navUser-item--quickSearch, .navUser-item--giftCerts, .navUser-item--divider  {display:none;}
+/* .navUser-section li:nth-child(1), .navUser-section li:nth-child(2),.navUser-section li:nth-child(3), .navUser-section li:nth-child(4) {display:none;} */
 
 .header-logo {padding-top:10px;}
 
@@ -587,4 +587,10 @@ header .header-search .form-field {margin: 0px;}
 	.cart-content-padding-right .KSPs .div3 { border-left: 1px solid #000;}
 	.cart-content-padding-right .KSPs .div5 {  border-left: 1px solid #000;}
 	.cart-content-padding-right .KSPs .div6 { border-left: 1px solid #000;}
+}
+
+/* https://whirlwind.teamwork.com/app/tasks/25795139 */
+article.card .sale-flag-side {
+    background: none !important;
+    color: #000 !important;
 }
