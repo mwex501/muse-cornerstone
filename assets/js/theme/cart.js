@@ -74,6 +74,7 @@ export default class Cart extends PageManager {
                 });
             }
         });
+		
     }
 
     cartUpdateQtyTextChange($target, preVal = null) {
@@ -246,6 +247,7 @@ export default class Cart extends PageManager {
             const quantity = $('[data-cart-quantity]', this.$cartContent).data('cartQuantity') || 0;
 
             $('body').trigger('cart-quantity-update', quantity);
+			
 
             $(`[data-cart-itemid='${this.$activeCartItemId}']`, this.$cartContent)
                 .filter(`[data-action='${this.$activeCartItemBtnAction}']`)
