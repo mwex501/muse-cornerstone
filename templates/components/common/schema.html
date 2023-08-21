@@ -1,0 +1,39 @@
+<!--Add Organization
+Add Business Logo
+Add Telephone-->
+
+<script type="application/ld+json">
+ {
+  "@context":"http://schema.org",
+  "@type":"Organization",
+  "url":"HTTPS://{{settings.secure_host}}",
+  "name":"{{settings.store_name}}",
+  "logo":"{{getImageSrcset settings.store_logo.image 1x=(default fallback_size '600w')}}",
+  "contactPoint":[
+   {"@type":"ContactPoint",
+   "telephone":"{{settings.phone_number}}",
+   "contactType":"customer service"}
+  ]
+ }
+</script>
+
+
+<!--Add Website
+Add Searchbox
+-->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url":"HTTPS://{{settings.secure_host}}",
+  "potentialAction":
+   {
+   "@type": "SearchAction",
+   "target": "HTTPS://{{settings.secure_host}}/search.php?search_query={search_term_string}",
+   "query": "required",
+   "query-input":"required name=search_term_string"
+   }
+ }
+</script>
+
+
