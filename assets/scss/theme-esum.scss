@@ -25,7 +25,7 @@ time, mark, audio, video  {font-family: 'Manrope',sans-serif !important;}
 .navPages-list .navUser-action {font-size: 16px; font-weight: 600;}
 .navPages-list .navPages-action {font-size: 16px; padding-bottom: 0px; padding-top: 4px; margin-top: 10px;}
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1425px) {
 	.navPages-list .navPages-action {font-size: 14px;}
 }
 
@@ -91,3 +91,12 @@ section.productView-details .productView-options {margin-bottom: 0px;}
 
 
 
+
+.navPages-container nav.navPages {margin-right: 0px;}
+
+
+@media screen and (max-width: 1325px) {
+	.navPages-list {
+		width: calc(100vw - 320px);
+	}
+}

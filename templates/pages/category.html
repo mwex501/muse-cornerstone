@@ -76,5 +76,31 @@ category:
 	
 </div>
 
+{{assignVar "secure_host" settings.secure_host}}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "url": "HTTPS://{{settings.secure_host}}{{category.url}}",
+    "numberOfItems": "{{category.total_products}}",
+    "itemListElement": [
+		{{#each category.products }}
+        {
+            "@type": "Product",
+			"position": {{@index}},
+            "image": "{{getImageSrcset image 1x=(default fallback_size '600w')}}",
+            "url": "HTTPS://{{getVar "secure_host"}}{{url}}",
+            "name": "{{{sanitize name}}}",
+            "offers": {
+                "@type": "Offer",
+                "priceCurrency": "USD",
+                "price": "{{price.without_tax.value}}"
+            }
+        }{{#unless @last}},{{/unless}}
+        {{/each}}
+    ]
+}
+</script>
+
 {{/partial}}
 {{> layout/base}}

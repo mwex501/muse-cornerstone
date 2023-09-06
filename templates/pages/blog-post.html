@@ -4,5 +4,64 @@
 
 {{> components/blog/post post=blog.post show_tags=true}}
 
+
+<script type="application/ld+json">
+
+{
+
+ "@context": "https://schema.org",
+
+ "@type": "NewsArticle",
+
+ "mainEntityOfPage": {
+
+  "@type": "WebPage",
+
+  "@id": "HTTPS://{{settings.secure_host}}{{blog.post.url}}"
+
+ },
+
+ "headline": "{{{sanitize blog.post.title}}}",
+
+ "image": [
+
+  "{{getImageSrcset blog.post.thumbnail 1x=(default fallback_size '600w')}}"
+
+  ],
+
+ "datePublished": "{{blog.post.date_published}}",
+
+ "dateModified": "{{blog.post.date_published}}",
+
+ "author": {
+
+  "@type": "Organization",
+
+  "name": "{{blog.post.author}}"
+
+ },
+
+ "publisher": {
+
+  "@type": "Organization",
+
+  "name": "{{settings.store_name}}",
+
+  "logo": {
+
+   "@type": "ImageObject",
+
+   "url": "{{getImageSrcset settings.store_logo.image 1x=(default fallback_size '600w')}}"
+
+  }
+
+ },
+
+ "description": "{{{strReplace (sanitize blog.post.body) '"' '&quot;' 99}}}"
+
+}
+
+</script>
+
 {{/partial}}
 {{> layout/base}}
