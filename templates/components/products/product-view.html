@@ -318,7 +318,7 @@
                 {{> components/products/add-to-cart}}
 
 
-				 {{> components/common/KSPs}}
+				 {{> components/common/KSPs custom_fields=product.custom_fields}}
                 {{#if product.out_of_stock}}
                     {{#if product.out_of_stock_message}}
                         {{> components/common/alert/alert-error product.out_of_stock_message}}

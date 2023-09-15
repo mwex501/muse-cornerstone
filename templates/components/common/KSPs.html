@@ -1,9 +1,31 @@
-<!--<div class="KSPs">
-					<span class="div1"><img src="{{cdn '/assets/img/truck.png'}}"></span>
-					<span class="div2"><img src="{{cdn '/assets/img/return.png'}}"></span>
-					<span class="div3"><img src="{{cdn '/assets/img/open.png'}}"></span>
-					<span class="div4">Same-day standard shipping before 12PM</span>
-					<span class="div5">30 day return policy</span>
-					<span class="div6">US orders delivered within 1-7 business days</span>
-				</div>-->
+{{assignVar 'KSP Image Path 1' (cdn '/assets/img/truck.png')}}
+{{assignVar 'KSP Image Path 2' (cdn '/assets/img/return.png')}}
+{{assignVar 'KSP Image Path 3' (cdn '/assets/img/open.png')}}
+{{assignVar 'KSP Image Alt 1' 'Same-day standard shipping before 12PM'}}
+{{assignVar 'KSP Image Alt 2' '30 day return policy'}}
+{{assignVar 'KSP Image Alt 3' 'US orders delivered within 1-7 business days'}}
+
+
+{{#if custom_fields}}
+	 {{#eachIndex (split "1,2,3" ",")}}
+		{{assignVar "loopindex" item}}
+		{{#eachIndex (split "KSP Image Path ,KSP Image Alt " ",")}}
+			{{#each ../../custom_fields}}
+				{{#if name '==' (concat ../item (getVar 'loopindex'))}}
+					{{assignVar name value}}
+				{{/if}}
+            {{/each}}
+		 {{/eachIndex}}
+	 {{/eachIndex}}
+{{/if}}
+<!--
+<div class="KSPs">
+					<span class="div1"><img src="{{getVar 'KSP Image Path 1'}}"></span>
+					<span class="div2"><img src="{{getVar 'KSP Image Path 2'}}"></span>
+					<span class="div3"><img src="{{getVar 'KSP Image Path 3'}}"></span>
+					<span class="div4">{{getVar 'KSP Image Alt 1'}}</span>
+					<span class="div5">{{getVar 'KSP Image Alt 2'}}</span>
+					<span class="div6">{{getVar 'KSP Image Alt 3'}}</span>
+				</div>
+				-->
 				
