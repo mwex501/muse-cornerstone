@@ -21,14 +21,19 @@ category:
 
 {{#if category.image}}
 <!-- solution for performance issue: explicit image width/height -->
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '1092w')}}" width="1092" height="216" class="img-1092-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '900w')}}" width="900" height="176" class="img-900-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '790w')}}" width="790" height="156" class="img-790-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '640w')}}" width="640" height="126" class="img-640-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '490w')}}" width="490" height="97" class="img-490-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '340w')}}" width="340" height="67" class="img-340-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '315w')}}" width="315" height="67" class="img-315-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
-<img src="{{getImageSrcset category.image 1x=(default fallback_size '240w')}}" width="240" height="47" class="img-240-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+<span itemscope itemtype="https://schema.org/ImageObject">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '1092w')}}" width="1092" height="216" class="img-1092-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '900w')}}" width="900" height="176" class="img-900-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '790w')}}" width="790" height="156" class="img-790-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '640w')}}" width="640" height="126" class="img-640-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '490w')}}" width="490" height="97" class="img-490-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '340w')}}" width="340" height="67" class="img-340-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '315w')}}" width="315" height="67" class="img-315-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<img itemprop="contentUrl"  src="{{getImageSrcset category.image 1x=(default fallback_size '240w')}}" width="240" height="47" class="img-240-cat img-res-cat" alt="{{category.image.alt}}" title="{{category.image.alt}}">
+	<span itemprop="creator" itemtype="https://schema.org/Person" itemscope>
+        <meta itemprop="name" content="{{settings.store_name}}" />
+    </span>
+</span>
 {{/if}}
 
 
