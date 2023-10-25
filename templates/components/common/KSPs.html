@@ -1,9 +1,5 @@
-{{assignVar 'KSP Image Path 1' (cdn '/assets/img/truck.png')}}
-{{assignVar 'KSP Image Path 2' (cdn '/assets/img/return.png')}}
-{{assignVar 'KSP Image Path 3' (cdn '/assets/img/open.png')}}
-{{assignVar 'KSP Image Alt 1' 'Same-day standard shipping before 12PM'}}
-{{assignVar 'KSP Image Alt 2' '30 day return policy'}}
-{{assignVar 'KSP Image Alt 3' 'US orders delivered within 1-7 business days'}}
+
+
 
 
 {{#if custom_fields}}
@@ -18,14 +14,123 @@
 		 {{/eachIndex}}
 	 {{/eachIndex}}
 {{/if}}
-<!--
-<div class="KSPs">
-					<span class="div1"><img src="{{getVar 'KSP Image Path 1'}}"></span>
-					<span class="div2"><img src="{{getVar 'KSP Image Path 2'}}"></span>
-					<span class="div3"><img src="{{getVar 'KSP Image Path 3'}}"></span>
-					<span class="div4">{{getVar 'KSP Image Alt 1'}}</span>
-					<span class="div5">{{getVar 'KSP Image Alt 2'}}</span>
-					<span class="div6">{{getVar 'KSP Image Alt 3'}}</span>
+
+{{assignVar "cols" 0}}
+{{#any (getVar 'KSP Image Path 1') (getVar 'KSP Image Alt 1') (getVar 'KSP Image Path 2') (getVar 'KSP Image Alt 2') (getVar 'KSP Image Path 3') (getVar 'KSP Image Alt 3')}}
+	<div class="KSPs">
+			{{#or (getVar 'KSP Image Path 1') (getVar 'KSP Image Alt 1')}}
+			
+				<!--{{incrementVar "cols"}}-->
+				<div class="KSP KSP1">
+					<img src="{{getVar 'KSP Image Path 1'}}">
+					<span>{{getVar 'KSP Image Alt 1'}}</span>
 				</div>
-				-->
+			{{/or}}
+			{{#or (getVar 'KSP Image Path 2') (getVar 'KSP Image Alt 2')}}
+				<!--{{incrementVar "cols"}}-->
+				<div class="KSP KSP2">
+					<img src="{{getVar 'KSP Image Path 2'}}">
+					<span>{{getVar 'KSP Image Alt 2'}}</span>
+				</div>
+			{{/or}}
+			{{#or (getVar 'KSP Image Path 3') (getVar 'KSP Image Alt 3')}}
+				<!--{{incrementVar "cols"}}-->
+				<div class="KSP KSP3">
+					<img src="{{getVar 'KSP Image Path 3'}}">
+					<span>{{getVar 'KSP Image Alt 3'}}</span>
+				</div>
+			{{/or}}				
+	</div>			
+{{/any}}	
+
+				<style>
+				
+				.KSPs {
+					display: inline-block;
+					position: relative;
+					width: 100%;
+					margin-bottom: 20px;
+					top: 20px;
+					border-radius: 5px;
+					border: none;
+				}
+				
+				.KSPs img {display: block; width: 70px; height: auto; margin-left: auto; margin-right: auto;}
+				.KSPs .KSP {
+					float: left;
+					position: relative;
+					display: inline-block;
+					margin: 0;
+					/* width: {{divide 100 (getVar "cols")}}%; */
+					width: 100px;
+					text-align: center;
+					/* border-top: 1px solid #000;
+					border-bottom: 1px solid #000; */
+					font-size: 12px;
+					padding-bottom: 5px;
+					padding-top: 10px;
+				}
+				/*
+				.KSPs .KSP:first-child {
+					border-left: 1px solid #000;
+					border-top-left-radius: 5px;
+					border-bottom-left-radius: 5px;
+				}
+				.KSPs .KSP:last-child {
+					border-right: 1px solid #000;
+					border-top-right-radius: 5px;
+					border-bottom-right-radius: 5px;
+				}
+				*/
+					@media screen and (max-width: 649px) {
+					    .KSPs {width: unset;}
+					}
+				
+				/*
+				.KSPs {
+		position: relative;
+		margin-bottom: 20px;
+		top: 20px;
+		display: grid;
+		width: 100%;
+		grid-template-columns: repeat(3, 1fr);
+		grid-template-rows: auto auto;
+		grid-column-gap: 0px;
+		grid-row-gap: 0px;
+		border: 1px solid #000;
+		border-radius: 5px;
+	}
+	.productView-options .KSPs span {text-align: center;}
+	.KSPs span {padding: 5px 10px; font-size: 14px; }
+	.productView-options .KSPs .div1 { grid-area: 1 / 1 / 2 / 2; }
+	.productView-options .KSPs .div2 { grid-area: 1 / 2 / 2 / 3; border-left: 1px solid #000;}
+	.productView-options .KSPs .div3 { grid-area: 1 / 3 / 2 / 4; border-left: 1px solid #000;}
+	.productView-options .KSPs .div4 { grid-area: 2 / 1 / 3 / 2; }
+	.productView-options .KSPs .div5 { grid-area: 2 / 2 / 3 / 3; border-left: 1px solid #000;}
+	.productView-options .KSPs .div6 { grid-area: 2 / 3 / 3 / 4; border-left: 1px solid #000;}
+	.KSPs img {display: block; width: 70px; height: auto; margin-left: auto; margin-right: auto;}
+	
+	@media screen and (min-width: 650px) {
+	.cart-content-padding-right .KSPs {
+		grid-template-columns: 100px calc(33% - 100px) 100px calc(33% - 100px) 100px calc(33% - 100px);
+		grid-template-rows: 1fr;
+	}
+	.cart-content-padding-right .KSPs span {padding: 10px; display: flex; justify-content: center; align-items: center;}
+	.cart-content-padding-right .KSPs .div1 { grid-area: 1 / 1 / 2 / 2; }
+	.cart-content-padding-right .KSPs .div2 { grid-area: 1 / 3 / 2 / 4; border-left: 1px solid #000;}
+	.cart-content-padding-right .KSPs .div3 { grid-area: 1 / 5 / 2 / 6; border-left: 1px solid #000;}
+	.cart-content-padding-right .KSPs .div4 { grid-area: 1 / 2 / 2 / 3; }
+	.cart-content-padding-right .KSPs .div5 { grid-area: 1 / 4 / 2 / 5; }
+	.cart-content-padding-right .KSPs .div6 { grid-area: 1 / 6 / 2 / 7; }
+}
+	
+	
+	@media screen and (max-width: 649px) {
+	.cart-content-padding-right .KSPs .div2 {  border-left: 1px solid #000;}
+	.cart-content-padding-right .KSPs .div3 { border-left: 1px solid #000;}
+	.cart-content-padding-right .KSPs .div5 {  border-left: 1px solid #000;}
+	.cart-content-padding-right .KSPs .div6 { border-left: 1px solid #000;}
+}
+*/
+	</style>
 				

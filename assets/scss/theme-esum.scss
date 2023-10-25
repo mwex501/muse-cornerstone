@@ -73,16 +73,10 @@ header.is-open a, header.header, .navUser-or, .navUser-item--cart .navUser-actio
 }
 
 /* https://whirlwind.teamwork.com/#/tasks/29711384 */
-section.productView-details {padding-bottom: 10px;}
-div.productView-product {padding-bottom: 0px; }
 h2.productView-brand {display: none;}
-dl.productView-info {margin-bottom: 0px;}
 dt.productView-info-name.sku-label {display: none;}
 dt.productView-info-name.upc-label {display: none;}
 dt.productView-info-name.upc-label + dd.productView-info-value {display: none;}
-section.productView-details .productView-options {margin-bottom: 0px;}
-.add-to-cart-wrapper .form-field--increments {margin-bottom: 0px;}
-#form-action-addToCart {margin-bottom: 0px;}
 
 @media screen and (max-width: 1200px) {
 	.add-to-cart-wrapper .form-field--increments {margin-bottom: 20px;}
