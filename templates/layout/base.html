@@ -4,7 +4,26 @@
     <head>
         <title>{{ head.title }}</title>
         {{{ resourceHints }}}
-        {{{ head.meta_tags }}}
+		
+		
+		{{#eq page_type 'product'}}
+			<!-- page_type=product -->
+		
+			{{#filter product.custom_fields 'canonical' property='name' }}
+				<!-- canonical override -->
+			  	{{#replace "<link rel='canonical' href" ../head.meta_tags}}<!-- canonical found --><link rel='canonical' href='{{value}}' oldhref{{else}}
+					<!-- canonical not found -->{{{../head.meta_tags}}}
+				{{/replace}}
+			{{else}}
+				<!-- no canonical override -->
+			  {{{head.meta_tags}}}
+			{{/filter}}
+		{{else}}
+			<!-- page_type!=product -->
+			{{{head.meta_tags}}}
+		{{/eq}}
+		
+		
         {{{ head.config }}}
         {{#block "head"}} {{/block}}
 

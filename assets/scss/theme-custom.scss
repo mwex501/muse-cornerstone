@@ -567,3 +567,144 @@ section.productView-details .productView-options {margin-bottom: 0px;}
 .add-to-cart-wrapper .form-field--increments {margin-bottom: 0px;}
 #form-action-addToCart {margin-bottom: 0px;}
 .productView-options [data-product-attribute="set-select"] {margin-bottom: 10px;}
+
+/* product page improvements https://whirlwind.teamwork.com/app/tasks/32745288 */
+
+.productView-product {font-size: 12px;}
+.productView-images { margin-bottom: 20px; }
+
+@media screen and (max-width: 1199px) {
+.add-to-cart-wrapper label {width: 50%;
+    display: inline-block;
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 0px;
+    top: 5px;
+    position: relative;
+    font-size: 18px;}
+	.add-to-cart-wrapper .form-increment {
+	    width: 50%;
+    display: inline-block;
+    text-align: left;
+	}
+	
+	.productView-options .form-action {
+	    width: 100%;
+    display: block;
+    text-align: unset;
+	}
+	
+	
+}
+@media screen and (max-width: 549px) {
+	.productView-description .tab {
+		display: inline-block;
+		width: calc(50% - 2px);
+	}
+}
+
+.productView-description .tabs-contents {
+	font-size: 16px;
+}
+
+
+.card-image {aspect-ratio: 1 / 1;}
+
+
+
+			.cart-content-padding-left.cart-ksps {
+					margin-top: 20px;
+					width: 50%;
+					float: left;
+					border: 1px solid #999;
+					padding: 10px 20px;
+				}
+				
+				.cart-content-padding-left.cart-ksps h3 {
+					margin-top: 0px;
+					font-weight: 800;
+				}
+				
+				.cart-content-padding-left.cart-ksps ul {
+					margin-bottom: 0px;
+					list-style: none;
+					margin-left: 0px;
+				}
+				
+				.cart-content-padding-left.cart-ksps ul li {
+					margin-bottom: 10px;
+				}
+				
+				.cart-content-padding-left.cart-ksps ul li span {
+					margin-right: 10px;
+					width: 20px;
+					display: inline-block;
+				}
+				
+				.cart-content-padding-left.cart-total-label {
+					padding-left: 0px;
+				}
+				
+				.cart-content-padding-left.cart-ksps-mobile {
+					width: 100%;
+					float: none;
+				}
+				
+				@media only screen and (min-width: 800px) {
+					.cart-content-padding-left.cart-ksps-mobile {display:none;}
+					.cart-content-padding-left .cart-totals-outer {
+						width: 50%;
+						float: right;
+					}
+				}
+				@media only screen and (max-width: 799px) {
+				.cart-content-padding-left.cart-ksps li {font-size: 14px;}
+					.cart-content-padding-left.cart-ksps-desktop {display:none;}
+					
+				}
+
+			.previewCartCheckout .button {
+				padding: 10px;
+			}
+			
+			.previewCartCheckout-subtotal {
+				margin: 0px;
+			}
+			
+			.previewCartCheckout-price {
+				display:inline;
+				font-size:inherit;
+				}
+				
+			.previewCartCheckout [data-cart-quantity] {
+				font-size: 14px;
+				}
+				
+			.previewCartCheckout .cart-ksps {
+					text-align: left;
+					border-top: 1px solid #999;
+					padding-top: 10px;
+				}
+				
+			.previewCartCheckout .cart-ksps h3 {
+					margin-top: 0px;
+					font-weight: 800;
+				}
+				
+			.previewCartCheckout .cart-ksps ul {
+					margin-bottom: 0px;
+					list-style: none;
+					margin-left: 0px;
+				}
+				
+			.previewCartCheckout .cart-ksps ul li {
+					margin-bottom: 10px;
+					font-size: 13px;
+				}
+				
+			.previewCartCheckout .cart-ksps ul li span {
+					margin-right: 5px;
+					width: 15px;
+					display: inline-block;
+					
+				}

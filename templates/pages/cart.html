@@ -21,11 +21,11 @@ cart: true
             <div data-cart-content class="cart-content-padding-right">
                 {{> components/cart/content}}
             </div>
-			<div class="cart-content-padding-right">
-				{{> components/common/KSPs}}
+			<div class="cart-content-padding-left cart-ksps cart-ksps-desktop">
+				{{> components/cart/cart-ksps}}
             </div>
 
-            <div data-cart-totals class="cart-content-padding-right">
+            <div data-cart-totals class="cart-content-padding-right cart-totals-outer">
                 {{> components/cart/totals}}
             </div>
 
@@ -48,6 +48,10 @@ cart: true
 
             <div data-cart-additional-checkout-buttons class="cart-additionalCheckoutButtons cart-content-padding-right">
                 {{> components/cart/additional-checkout-buttons}}
+            </div>
+			
+			<div class="cart-content-padding-left cart-ksps cart-ksps-mobile">
+				{{> components/cart/cart-ksps}}
             </div>
 
         {{else}}

@@ -6,6 +6,7 @@
 
 <div class="modal-body">
     <div class="previewCart">
+
         <section class="previewCartCheckout">
             {{#if cart.show_primary_checkout_button}}
                 <a href="{{urls.checkout.single_address}}" class="button button--primary">
@@ -50,6 +51,10 @@
             <a href="{{urls.cart}}" class="button">
                 {{lang 'cart.added_to_cart.view_or_edit_cart'}}
             </a>
+			
+			<div class="cart-ksps cart-ksps-desktop">
+				{{> components/cart/cart-ksps}}
+            </div>
         </section>
         <section class="productView">
             {{#with cart.added_item}}

@@ -46,36 +46,39 @@
         {{#if product.images.length '>' 1 }}
         {{> components/carousel-content-announcement}}
         {{/if}}
-        <figure class="productView-image"
-                data-image-gallery-main
-                {{#if product.main_image}}
-                data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
-                {{/if}}
-                >
-            <div class="productView-img-container">
-                {{!-- Remove the surrounding a-element if there is no main image. --}}
-                {{#if product.main_image}}
-                    <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
-                        target="_blank">
-                {{/if}}
-                {{> components/common/responsive-img
-                    image=product.main_image
-                    class="productView-image--default"
-                    fallback_size=theme_settings.product_size
-                    lazyload=theme_settings.lazyload_mode
-                    default_image=theme_settings.default_image_product
-                    otherAttributes="data-main-image"
-                }}
-                {{!-- Remove the surrounding a-element if there is no main image. --}}
-                {{#if product.main_image}}
-                    </a>
-                {{/if}}
-            </div>
-			
-        </figure>
-		<div class="productView-video-container">
-				<iframe width="528" height="528" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-			</div>
+		<div class="media-container">
+			<figure class="productView-image"
+					data-image-gallery-main
+					{{#if product.main_image}}
+					data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+					{{/if}}
+					>
+				<div class="productView-img-container">
+					{{!-- Remove the surrounding a-element if there is no main image. --}}
+					{{#if product.main_image}}
+						<a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+							target="_blank">
+					{{/if}}
+					{{> components/common/responsive-img
+						image=product.main_image
+						class="productView-image--default"
+						fallback_size=theme_settings.product_size
+						lazyload=theme_settings.lazyload_mode
+						default_image=theme_settings.default_image_product
+						otherAttributes="data-main-image"
+					}}
+					{{!-- Remove the surrounding a-element if there is no main image. --}}
+					{{#if product.main_image}}
+						</a>
+					{{/if}}
+				</div>
+				
+			</figure>
+			<div class="productView-video-container">
+					<iframe width="528" height="528" src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+				</div>
+		</div>
+		{{#gt product.images.length 1}}
         <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
                 "infinite": false,
                 "mobileFirst": true,
@@ -119,6 +122,7 @@
 				{{/if}}
 			{{/each}}
         </ul>
+		{{/gt}}
     </section>
 	<script>
 		function productViewVideo(e){
@@ -309,12 +313,14 @@
                         {{{dynamicComponent 'components/products/options'}}}
                     {{/each}}
                 </div>
+				<!-- hidden per https://whirlwind.teamwork.com/app/tasks/32770752
                 <div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
                     <label class="form-label form-label--alternate">
                         {{lang 'products.current_stock'}}
                         <span data-product-stock>{{product.stock_level}}</span>
                     </label>
                 </div>
+				-->
                 {{> components/products/add-to-cart}}
 
 

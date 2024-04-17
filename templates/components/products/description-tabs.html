@@ -1,11 +1,11 @@
 
 
 <ul class="tabs" data-tab>
-	<li class="tab is-active"><a class="tab-title" href="#tab-1">Description</a></li>
+	<li class="tab"><a class="tab-title" href="#tab-1">Description</a></li>
 	{{assignVar "loopno" 1}}
 	{{#each (split product.description "||") as |item i|}}
 		{{#startsWith "Tab:" item}}
-			<li class="tab"><a class="tab-title" href="#tab-{{incrementVar "loopno"}}">{{{strReplace item "Tab:" " "}}}</a></li>
+			<li class="tab {{#if i '==' 1}}is-active{{/if}}"><a class="tab-title" href="#tab-{{incrementVar "loopno"}}">{{{strReplace item "Tab:" " "}}}</a></li>
 		{{else}}
 		{{/startsWith}}
 	{{/each}}
@@ -34,7 +34,7 @@
 	{{#each (split product.description "||") as |item i|}}
 		{{#startsWith "Tab:" item}}
 		{{else}}
-		<div class="tab-content {{#if (incrementVar "loopno") '===' 1}}is-active{{/if}}" id="tab-{{getVar "loopno"}}">{{{item}}}</div>
+		<div class="tab-content {{#if (incrementVar "loopno") '===' 2}}is-active{{/if}}" id="tab-{{getVar "loopno"}}">{{{item}}}</div>
 		{{/startsWith}}
 	{{/each}}
 	{{#if product.warranty}}
