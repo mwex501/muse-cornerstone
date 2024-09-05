@@ -79,7 +79,7 @@
 				</div>
 		</div>
 		{{#gt product.images.length 1}}
-        <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
+        <ul class="productView-thumbnails not-discontinued"{{#gt product.images.length 5}} data-slick='{
                 "infinite": false,
                 "mobileFirst": true,
                 "dots": false,
@@ -165,6 +165,8 @@
     <section class="productView-details product-data">
         <div class="productView-product">
             <h1 class="productView-title">{{product.title}}</h1>
+            
+            <div class="yotpo-widget-instance" data-yotpo-instance-id="783776" data-yotpo-product-id="{{product.id}}"></div>
             {{#if product.brand}}
                 <h2 class="productView-brand">
                     <a href="{{product.brand.url}}"><span>{{product.brand.name}}</span></a>
@@ -183,6 +185,7 @@
                 {{/or}}
             </div>
             {{{region name="product_below_price"}}}
+
             <div class="productView-rating">
                 {{#if settings.show_product_rating}}
                     {{> components/products/ratings rating=product.rating}}
@@ -298,7 +301,42 @@
         </div>
     </section>
 
-    <section class="productView-details product-options">
+{{assignVar "discontinued" 0}}<!-- test 1 -->
+{{#filter product.custom_fields 'status' property='name' }}<!-- test 2 -->
+  {{#eq value 'discontinued'}}<!-- test 3 -->
+    {{assignVar "discontinued" 1}}<!-- test 4 -->
+  {{/eq}}
+{{/filter}}
+<!-- discontinued: {{getVar "discontinued"}} -->
+    <style>
+        .discontinued {display: none;}
+        .productView-discontinued {
+            border: 2px solid #000;
+    padding: 10px 50px;
+    text-align: center;
+        }
+        
+        .productView-discontinued h2, .productView-discontinued h3 {
+            margin-top: 10px;
+        }
+        
+        
+        {{#eq (getVar "discontinued") 1}}
+            .discontinued {display: block;}
+            .not-discontinued {display: none;}
+        {{/eq}}
+        
+    </style>
+    <section class="productView-details discontinued">
+        <div class="productView-discontinued">
+            <h2>We're Sorry! </h2>
+            <h3>This product is discontinued.</h3>
+            <p>Check out similar items below! </p>
+        </div>
+    </section>
+    
+
+    <section class="productView-details product-options not-discontinued">
         <div class="productView-options">
             {{#if product.release_date }}
                 <p>{{product.release_date}}</p>
@@ -340,7 +378,7 @@
         {{> components/common/share url=product.url}}
     </section>
 
-    <article class="productView-description">
+    <article class="productView-description not-discontinued">
         {{#if theme_settings.show_product_details_tabs}}
             {{> components/products/description-tabs}}
         {{else}}
@@ -349,6 +387,8 @@
     </article>
 </div>
 
+
+
 <div id="previewModal" class="modal modal--large" data-reveal>
     <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
         <span aria-hidden="true">&#215;</span>
@@ -356,6 +396,9 @@
     <div class="modal-content"></div>
     <div class="loadingOverlay"></div>
 </div>
+
+
+
 <script>
 //Close Popup in Pick List
 function closePopup(clid) {
@@ -415,3 +458,5 @@ function openPopup(opid) {
     };
     
 </script>
+
+<div class="yotpo-widget-instance not-discontinued" data-yotpo-instance-id="640120" data-yotpo-product-id="{{ product.id }}" data-yotpo-name="{{ product.title }}" data-yotpo-url="{{ product.url }}" data-yotpo-image-url="{{ getImage product.main_image }}" data-yotpo-price="{{ product.price.without_tax.value }}" data-yotpo-currency="{{ currency_selector.active_currency_code }}" data-yotpo-description="{{ product.description }}"></div>

@@ -84,6 +84,7 @@ dt.productView-info-name.upc-label + dd.productView-info-value {display: none;}
 
 
 
+.productGrid .yotpo-sr-bottom-line-right-panel {display: none !important;}
 
 
 .navPages-container nav.navPages {margin-right: 0px;}
@@ -94,3 +95,15 @@ dt.productView-info-name.upc-label + dd.productView-info-value {display: none;}
 		width: calc(100vw - 320px);
 	}
 }
+
+.card-body .yotpo a.text-m {display: none;}
+
+.yotpo-bottomline.pull-left {
+    float: none;
+    text-align: center;
+}
+.yotpo a.text-m {
+    display: inline-block;
+}
+
+

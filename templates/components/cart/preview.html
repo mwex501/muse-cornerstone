@@ -79,6 +79,7 @@
                         {{brand.name}}
                     </div>
 
+         
                     <div class="productView-price">
                         {{#or ../customer (if ../theme_settings.restrict_to_login '!==' true)}}
                             {{quantity}} &times; {{price.formatted}}
@@ -97,7 +98,17 @@
                             </dd>
                         </dl>
                     {{/each}}
+     
+                    
+                    
                 </div>
+
+                <style>
+                    #previewModal .previewCart .products-related {
+                        padding-top: {{multiply (length options) 60}}px ;
+                    }
+                    
+                </style>
 				<script>
 					// Measure adding a product to a shopping cart by using an 'add' actionFieldObject
 					// and a list of productFieldObjects.
@@ -166,3 +177,239 @@
         </section>
     {{/if}}
 </div>
+
+
+ <script>
+ 
+{{assignVar "upsells" "0"}}
+{{#each cart.added_item.custom_fields}}
+		//[NAME {{name}}]
+        {{#if name '===' 'Cart Upsells' }}
+			//[UPSELLS {{value}}]
+			{{assignVar "upsells" value}}
+			//[UPSELLS1 {{getVar "upsells"}}]
+        {{/if}}
+{{/each}} 
+{{#if (getVar "upsells") "!=" "0"}}
+//[UPSELLS2 {{getVar "upsells"}}]
+
+getUpsell('{{getVar "upsells"}}');
+
+function getUpsell(skuList,dataArr){
+	console.log('skuList ' +skuList);
+	var dataArr = dataArr || [];
+	var skuArr = skuList.split(",");
+	var sku = skuArr.shift();
+	console.log('sku ' + sku);
+	var newSkuList = skuArr.join(",");
+	fetch('/graphql', {
+	   method: 'POST',
+	   credentials: 'same-origin',
+	   headers: {
+		   'Content-Type': 'application/json',
+		   'Authorization': 'Bearer {{settings.storefront_api.token}}'
+	   },
+	   body: JSON.stringify({
+		   query: `query{
+	 site {
+
+		 product(sku:"`+sku+`") {
+					entityId
+					id
+					sku
+					path
+					name
+					addToCartUrl
+					mpn
+					prices {
+						price {
+							currencyCode
+							value
+					 }
+					}
+					images {
+						 edges {
+						   node {
+							 url640wide:url(width:640)
+							 urlOriginal
+							 altText
+							 isDefault
+						   }
+						 }
+					   }
+					 reviewSummary {
+						 summationOfRatings
+						 numberOfReviews
+					   }
+					
+				}
+		   }
+		 }
+		`
+		   }),
+		}).then(function(response) {
+						return response.json();
+		}).then(function(response) {
+		   console.log('then2');
+			console.log(response); 
+			console.log(response.data.site.product);
+			console.log(dataArr);
+			console.log('newSkuList '+newSkuList);
+			dataArr = dataArr.concat([{node: response.data.site.product}]);
+			console.log(dataArr);
+			console.log('then2end');
+			if(newSkuList) getUpsell(newSkuList,dataArr);
+			else displayUpsells(dataArr);
+		});
+};
+
+function displayUpsells(dataArr){
+	//console.log('displayUpsells');
+	if(!$('.previewCart .product-related').length) $('.previewCart .productView').after('<section class="products-related layout-container"><h2 class="section-title">Add These Items To Complete The Look</h2><div class="product-grid"></div></section>');
+	console.log('before each');
+	$.each(dataArr, function(index,value){
+		if(index > 2) return false; // break
+		console.log(value.node);
+		var productCard = getProductCard(value.node);
+		console.log(productCard);
+		if(productCard) $('.previewCart .products-related .product-grid').append(productCard);
+
+	});
+	console.log('after each');
+	//console.log('decrement'+$('.previewCart .products-related .product-grid .quantity-decrement').length);
+	$('.previewCart .products-related .product-grid .quantity-decrement').click(function(){
+		
+		$(this).closest('.form-field-quantity').find('.form-input').val($(this).closest('.form-field-quantity').find('.form-input').val() - 1); 
+		if($(this).closest('.form-field-quantity').find('.form-input').val() < 1) $(this).closest('.form-field-quantity').find('.form-input').val(1);
+	});
+	$('.previewCart .products-related .product-grid .quantity-increment').click(function(){
+	//console.log('increment');
+		$(this).closest('.form-field-quantity').find('.form-input').val(parseInt($(this).closest('.form-field-quantity').find('.form-input').val()) + 1); 
+	});
+	$('.previewCart .products-related .product-grid .add-to-cart').each(function(index,element){
+		
+		console.log('setting button');
+		$(element).click(function(){
+			//console.log('button clicked');
+			//console.log(this);
+			// cart.php?action=add&sku=INSERT-SKU-HERE
+			$(this).css({'background-color':'#ccc','color':'#888'}).text('Adding...').attr('disabled','disabled');
+			$.ajax({
+				url: '/cart.php?action=add&product_id='+$(this).attr('data-product-id')+'&qty='+$(this).closest('article').find('.form-field-quantity .form-input').val(),
+				buttonObj : this
+			}).done(function(data,status,xr){
+				$(this.buttonObj).css({'background-color':'#ccc','color':'#888'}).text('Added');
+				//console.log('item added '+status+ ' | '+this.url);
+				setTimeout(function(){
+					console.log('timeout');
+					console.log(arguments);
+					$(arguments[0]).css({'background-color':'#000','color':'#FFF'}).text('Add To Cart').removeAttr('disabled');
+					},3000,this.buttonObj);
+			});
+		});
+	});
+
+};
+	
+{{ else }}
+/*
+				if(!$('.previewCart .product-related').length) $('.previewCart .previewCartCheckout').after('<section class="products-related layout-container"><h2 class="section-title">Greate Addition To Your Order</h2><div class="product-grid single"></div></section>');
+
+				var productCard = '<article class="card product-item" data-product-id="6134">'+
+				'<figure class="product-item-top card-figure"><a href="/silk-flower-plant-cleaner/ACM104-00" class="product-item-thumbnail" title="Silk Flower &amp; Plant Cleaner - 16.9 Fluid Ounces" data-product-compare-image="https://cdn11.bigcommerce.com/s-r932bs4ubb/images/stencil/100w/products/6134/6988/acm104-00-original__50309.1639500729.jpg"><img class="card-image" src="https://cdn11.bigcommerce.com/s-r932bs4ubb/images/stencil/100w/products/6134/6988/acm104-00-original__50309.1639500729.jpg" alt="Silk Flower &amp; Plant Cleaner - 16.9 Fluid Ounces"><div class="product-item-overlay"></div></a></figure>'+
+				'<div class="product-item-details"><h3 class="product-item-title"><a href="/silk-flower-plant-cleaner/ACM104-00">SILK FLOWER &amp; PLANT CLEANER</a></h3><p class="product-item-description">Lightly spray silk flowers and folliage and within seconds, they will be clean and dust free. No wiping necessary!</p></div>'+
+				'<div class="product-item-price"><span class="price price--withoutTax">Only $14.95 per can</span><span class="price-bulk">As low as $12.95 ea. when you buy 3+!</span></div>'+
+				'<div class="buy-block"><span class="form-field-quantity" data-quantity-control=""><span class="quantity-control quantity-decrement" data-quantity-control-action="decrement"><svg class="form-control-quantity"><use xlink:href="#icon-minus"></use></svg></span><input class="form-input" type="number" name="qty[]" pattern="[0-9]*" value="1" min="0" data-quantity-control-input=""><span class="quantity-control quantity-increment" data-quantity-control-action="increment"><svg class="form-control-quantity"><use xlink:href="#icon-plus"></use></svg></span></span><button class="add-to-cart" data-product-id="6134" data-sku="ACM104-00">Add To Cart</button></div></article>';
+				$('.previewCart .products-related .product-grid').append(productCard);
+
+				$('.previewCart .products-related .product-grid .quantity-decrement').click(function(){
+				console.log('decrement');
+					$(this).closest('.form-field-quantity').find('.form-input').val($(this).closest('.form-field-quantity').find('.form-input').val() - 1); 
+					if($(this).closest('.form-field-quantity').find('.form-input').val() < 1) $(this).closest('.form-field-quantity').find('.form-input').val(1);
+				});
+				$('.previewCart .products-related .product-grid .quantity-increment').click(function(){
+					$(this).closest('.form-field-quantity').find('.form-input').val(parseInt($(this).closest('.form-field-quantity').find('.form-input').val()) + 1); 
+					console.log('increment');
+				});
+				$('.previewCart .products-related .product-grid .add-to-cart').each(function(index,element){
+					
+					console.log('setting button');
+					$(element).click(function(){
+						console.log('button clicked');
+						//console.log(this);
+						// cart.php?action=add&sku=INSERT-SKU-HERE
+						$(this).css({'background-color':'#ccc','color':'#888'}).text('Adding...').attr('disabled','disabled');
+						$.ajax({
+							url: '/cart.php?action=add&product_id='+$(this).attr('data-product-id')+'&qty='+$(this).closest('article').find('.form-field-quantity .form-input').val(),
+							buttonObj : this
+						}).done(function(data,status,xr){
+							$(this.buttonObj).css({'background-color':'#ccc','color':'#888'}).text('Added');
+							console.log('item added '+status+ ' | '+this.url);
+							setTimeout(function(){
+								console.log('timeout');
+								console.log(arguments);
+								$(arguments[0]).css({'background-color':'#85AA65','color':'#FFF'}).text('Add To Cart').removeAttr('disabled');
+								},3000,this.buttonObj);
+						});
+					});
+				});
+
+*/
+{{/if}} 				
+
+			
+function escapeHtml(text) {
+  var map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}		
+		
+			
+function getProductCard(data){
+	console.log('getProductCard');
+	console.log(data);
+	if(data === null) {
+		return false;
+	} else {
+		var card = '<article class="card product-item" data-product-id="'+data.entityId+'">'
+			+'<figure class="product-item-top card-figure">'
+			+'<a href="'+data.path+'" class="product-item-thumbnail" title="'+escapeHtml(data.name)+'" data-product-compare-image="'+data.images.edges[0].node.url640wide+'">'
+			+'<img class="card-image" src="'+data.images.edges[0].node.url640wide+'" alt="'+escapeHtml(data.name)+'"><div class="product-item-overlay"></div>'
+			+'</a></figure>'
+			+'<div class="card-body">'
+			+'<div class="swatches-cont"></div>'
+			+'<div class="product-item-details">'
+			+'<h3 class="product-item-title"><a href="'+data.path+'">'+escapeHtml(data.name)+'</a></h3>'
+			+'<div class="product-item-price"><div class="price"><span class="price price--withoutTax">\$'+((data.prices) ? (data.prices.price.value).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') : '?')+'</span></div></div>'
+			+'</div>' // product-item-details
+			+'<div class="card-details"><p class="card-text rating-stars large-stars" data-test-info-type="productRating">';
+			
+		for(i=1;i<=5;i++){
+			if(data.reviewSummary.summationOfRatings >= i) card += '<svg class="rating-star rating-star-full"><use xlink:href="#icon-star"></use></svg>';
+			else card += '<svg class="rating-star rating-star-empty"><use xlink:href="#icon-star"></use></svg>';
+		}; // end for
+		card += '</p></div>'
+			+'<span class="form-field-quantity" data-quantity-control="">'
+				+'<span class="quantity-control quantity-decrement" data-quantity-control-action="decrement">-</span>'
+				+'<input class="form-input" type="number" name="qty[]" pattern="[0-9]*" value="1" min="0" data-quantity-control-input="">'
+				+'<span class="quantity-control quantity-increment" data-quantity-control-action="increment">+</span>'
+			+'</span>'
+			+'<button class="add-to-cart button button--primary" data-product-id="'+data.entityId+'" data-sku="'+data.sku+'">Add To Cart</button>'
+			+'</div></article>';
+		return $(card);
+		};
+};
+
+
+
+
+ </script>
+ 
+   
+  

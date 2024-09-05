@@ -157,6 +157,14 @@
                 {{name}}
             </a>
         </h3>
+		<style>
+            .card-body .yotpo a.text-m {display: none;}
+            .card-body .yotpo-sr-bottom-line-right-panel {display: none !important;}
+        </style>
+        <div style="text-align: center">
+            <div class="yotpo bottomLine" style="display:inline-block" data-product-id="{{ id }}">
+            </div>
+        </div>
 
         <div class="card-text" data-test-info-type="price">
             {{#or customer (if theme_settings.restrict_to_login '!==' true)}}
